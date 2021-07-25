@@ -12,7 +12,13 @@ Run the server
 ```
 python server.py
 ```
-
+In other Terminal
+```
+python to_database.py
+```
+```
+Open About.html
+```
 Server runs at
 ```
 http://localhost:5000/
