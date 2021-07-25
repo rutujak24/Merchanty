@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Cart</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+  <link rel="stylesheet" href="shopping_cart.css">
+
+</head>
+
+<body background="website-background.png">
+  <h1>Your Cart</h1>
+
+  <div class="shopping-cart">
+
+    <div class="column-labels">
+      <label class="product-image">Image</label>
+      <label class="product-details">Product</label>
+      <label class="product-price">Price</label>
+      <label class="product-quantity">Quantity</label>
+      <label class="product-removal">Remove</label>
+      <label class="product-line-price">Total</label>
+    </div>
+
+    <script>
+      var data = null;
+      var obj = null;
+      var request = new XMLHttpRequest();
+      var req_url = 'http://localhost:5000/usercart/' + sessionStorage.getItem('uname');
+      request.open('GET', req_url, true);
+
+
+
+      request.onload = function () {
+        data = this.response;
+        // console.log(data);
+        obj = JSON.parse(data);
+        console.log(obj);
+
+        document.write("<title>Shopping Cart</title>");
+        document.write("<link rel=\"stylesheet\" href=\"shopping_cart.css\">");
+        document.write("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css\">");
+        document.write("<body background=\"website-background.png\">");
+        document.write("<h1>Your Cart</h1>");
+        document.write("<div class=\"shopping-cart\">");
+        document.write("<div class=\"column-labels\"><label class=\"product-image\">Image</label><label class=\"product-details\">Product</label><label class=\"product-price\">Price</label><label class=\"product-quantity\">Quantity</label><label class=\"product-removal\">Remove</label><label class=\"product-line-price\">Total</label></div>");
+        for (x in obj) {
+          console.log(x);
+          var currItem = obj[x];
+          console.log(currItem);
+
+          document.write("<div class=\"product\"><div class=\"product-image\"><img src=\"" + currItem.image + "\"></div><div class=\"product-details\"><div class=\"product-title\">" + currItem.item + " " + currItem.type + "</div></div><div class=\"product-price\">" + currItem.price.substring(1) + "</div><div class=\"product-quantity\"><input type=\"number\" value=\"1\" min=\"1\"></div><div class=\"product-removal\"><button class=\"remove-product\">Remove</button></div><div class=\"product-line-price\">" + currItem.price.substring(1) + "</div></div>");
+        }
+
+
+        // start of bs code
+        /* Set rates + misc */
+        var taxRate = 0.18;
+        var shippingRate = 100.00;
+        var fadeTime = 300;
+
+
+        /* Assign actions */
+        $('.product-quantity input').change(function () {
+          updateQuantity(this);
+        });
+
+        $('.product-removal button').click(function () {
+          removeItem(this);
+        });
+
+
+        /* Recalculate cart */
+        function recalculateCart() {
+          var subtotal = 0;
+
+          /* Sum up row totals */
+          $('.product').each(function () {
+            subtotal += parseFloat($(this).children('.product-line-price').text());
+          });
+
+          /* Calculate totals */
+          var tax = subtotal * taxRate;
+          var shipping = (subtotal > 0 ? shippingRate : 0);
+          var total = subtotal + tax + shipping;
+
+          /* Update totals display */
+          $('.totals-value').fadeOut(fadeTime, function () {
+            $('#cart-subtotal').html(subtotal.toFixed(2));
+            $('#cart-tax').html(tax.toFixed(2));
+            $('#cart-shipping').html(shipping.toFixed(2));
+            $('#cart-total').html(total.toFixed(2));
+            if (total == 0) {
+              $('.checkout').fadeOut(fadeTime);
+            } else {
+              $('.checkout').fadeIn(fadeTime);
+            }
+            $('.totals-value').fadeIn(fadeTime);
+          });
+        }
+
+
+        /* Update quantity */
+        function updateQuantity(quantityInput) {
+          /* Calculate line price */
+          var productRow = $(quantityInput).parent().parent();
+          console.log(productRow);
+          var price = parseFloat(productRow.children('.product-price').text());
+          console.log(price);
+          var quantity = $(quantityInput).val();
+          console.log(quantity);
+          var linePrice = price * quantity;
+
+          /* Update line price display and recalc cart totals */
+          productRow.children('.product-line-price').each(function () {
+            $(this).fadeOut(fadeTime, function () {
+              $(this).text(linePrice.toFixed(2));
+              recalculateCart();
+              $(this).fadeIn(fadeTime);
+            });
+          });
+        }
+
+
+        /* Remove item from cart */
+        function removeItem(removeButton) {
+          /* Remove row from DOM and recalc cart total */
+          var productRow = $(removeButton).parent().parent();
+          productRow.slideUp(fadeTime, function () {
+            productRow.remove();
+            recalculateCart();
+          });
+        }
+        // end of bs code
+
+        document.write("<div class=\"totals\"><div class=\"totals-item\"><label>Subtotal</label><div class=\"totals-value\" id=\"cart-subtotal\">9798</div></div><div class=\"totals-item\"><label>Tax (18%)</label><div class=\"totals-value\" id=\"cart-tax\">1763.64</div></div><div class=\"totals-item\"><label>Shipping</label><div class=\"totals-value\" id=\"cart-shipping\">100</div></div><div class=\"totals-item totals-item-total\"><label>Grand Total</label><div class=\"totals-value\" id=\"cart-total\">11661.64</div></div></div>");
+        document.write("<button class=\"checkout\"><a href=\"input_page.html\">Checkout</a></button>");
+
+      }
+      request.send();
+
+    // recalculateCart();
+
+    </script>
+
+    <div class="product">
+      <div class="product-image">
+        <img src="tshirt_design1.jpg">
+      </div>
+      <div class="product-details">
+        <div class="product-title">Adidas Originals Tshirt</div>
+      </div>
+      <div class="product-price">1799</div>
+      <div class="product-quantity">
+        <input type="number" value="2" min="1">
+      </div>
+      <div class="product-removal">
+        <button class="remove-product">
+          Remove
+        </button>
+      </div>
+      <div class="product-line-price">1799</div>
+    </div>
+
+    <div class="product">
+      <div class="product-image">
+        <img src="shoe_design1.jpg">
+      </div>
+      <div class="product-details">
+        <div class="product-title">Adidas Originals Pink Campus Suede Sneakers</div>
+        <p class="product-description">A low-profile classic from the '80s gets a luxe new look. These women's shoes
+          come in super-soft nubuck suede and are lined for a smooth, leather-like feel. A modern shape, streamlined
+          rubber cupsole gives a sleek silhouette. Built tough and has a reinforced toe cap that adds durability.</p>
+      </div>
+      <div class="product-price">7999</div>
+      <div class="product-quantity">
+        <input type="number" value="1" min="1">
+      </div>
+      <div class="product-removal">
+        <button class="remove-product">
+          Remove
+        </button>
+      </div>
+      <div class="product-line-price">7999</div>
+    </div>
+
+    <div class="totals">
+      <div class="totals-item">
+        <label>Subtotal</label>
+        <div class="totals-value" id="cart-subtotal">9798</div>
+      </div>
+      <div class="totals-item">
+        <label>Tax (18%)</label>
+        <div class="totals-value" id="cart-tax">1763.64</div>
+      </div>
+      <div class="totals-item">
+        <label>Shipping</label>
+        <div class="totals-value" id="cart-shipping">100</div>
+      </div>
+      <div class="totals-item totals-item-total">
+        <label>Grand Total</label>
+        <div class="totals-value" id="cart-total">11661.64</div>
+      </div>
+    </div>
+
+    <button class="checkout"><a href="input_page.html">Checkout</a></button> -->
+
+  </div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+
+  <script src="shopping_cart.js"></script>
+
+</body>
+
+</html>

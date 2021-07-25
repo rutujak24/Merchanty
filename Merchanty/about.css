@@ -1,0 +1,146 @@
+body {
+    background-image: url("wall.jpg");
+    font-size: '13px';
+    font-family: 'Open Sans', sans-serif;
+    font-size: '13px';
+    font-family: 'Open Sans', sans-serif;
+    background-size: 2048px 1152px;
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+    -webkit-animation: move 300s linear infinite;
+    -moz-animation: move 300s linear infinite;
+    -ms-animation: move 300s linear infinite;
+    animation: move 100s linear infinite;
+    z-index: -2;
+    text-align: center;
+}
+
+@-webkit-keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 7680px 0px;
+    }
+}
+
+@moz-keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 7680px 0px;
+    }
+}
+
+@-ms-keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 7680px 0px;
+    }
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 7680px 0px;
+    }
+}
+
+@-webkit-keyframes font {
+    0% {
+        font-size: 0;
+    }
+    100% {
+        font-size: 100%;
+    }
+}
+
+@-moz-keyframes font {
+    0% {
+        font-size: 0;
+    }
+    100% {
+        font-size: 100%;
+    }
+}
+
+@-ms-keyframes font {
+    0% {
+        font-size: 0;
+    }
+    100% {
+        font-size: 100%;
+    }
+}
+
+@keyframes font {
+    0% {
+        font-size: 0;
+    }
+    100% {
+        font-size: 100%;
+    }
+}
+
+h1 {
+    font-size: 60px;
+}
+
+.about-us-title {
+    color: white;
+    padding: 10% 15% 0 15%;
+}
+
+div.about-us-content {
+    color: white;
+    padding: 0 15% 0 15%;
+    line-height: 1.5;
+    font-size: 25px;
+}
+
+div.shop {
+    padding-top: 2%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+div.back-button {
+    padding: 2%;
+}
+
+.myButton {
+    /* box-shadow: inset 0px 1px 0px 0px #ffffff; */
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    /* border: 1px solid #dcdcdc; */
+    display: inline-block;
+    cursor: pointer;
+    color: #000000;
+    font-family: Arial;
+    font-size: 23px;
+    font-weight: bold;
+    padding: 21px 35px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #000000;
+}
+
+.myButton:hover {
+    background-color: #8B008B;
+    color: #000000;
+    
+
+}
+
+.myButton:active {
+    position: relative;
+    top: 1px;
+}

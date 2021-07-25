@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Material Design Text Input</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+
+		* {
+			font-family: "Roboto", Arial, sans-serif;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-size: 0.9rem;
+			background-color: #ebebeb;
+			padding: 20px;
+			transition: font-size 0.2s ease;
+			font-family: 'Roboto', sans-serif;
+			background: "website-background (2).jpg";
+			background-color: #b19cd9;
+			font-size: '13px';
+			font-family: 'Open Sans', sans-serif;
+
+			font-size: '13px';
+			font-family: 'Open Sans', sans-serif;
+
+
+			background-size: 7680px 2160px;
+			image-rendering: optimizeSpeed;
+			image-rendering: -moz-crisp-edges;
+			image-rendering: -o-crisp-edges;
+			image-rendering: -webkit-optimize-contrast;
+			image-rendering: pixelated;
+			image-rendering: optimize-contrast;
+			-ms-interpolation-mode: nearest-neighbor;
+			-webkit-animation: move 300s linear infinite;
+			-moz-animation: move 300s linear infinite;
+			-ms-animation: move 300s linear infinite;
+			animation: move 300s linear infinite;
+			z-index: -2;
+		}
+
+		@-webkit-keyframes move {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: 7680px 0px;
+			}
+		}
+
+		@moz-keyframes move {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: 7680px 0px;
+			}
+		}
+
+		@-ms-keyframes move {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: 7680px 0px;
+			}
+		}
+
+		@keyframes move {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: 7680px 0px;
+			}
+		}
+
+		@-webkit-keyframes font {
+			0% {
+				font-size: 0;
+			}
+
+			100% {
+				font-size: 100%;
+			}
+		}
+
+		@-moz-keyframes font {
+			0% {
+				font-size: 0;
+			}
+
+			100% {
+				font-size: 100%;
+			}
+		}
+
+		@-ms-keyframes font {
+			0% {
+				font-size: 0;
+			}
+
+			100% {
+				font-size: 100%;
+			}
+		}
+
+		@keyframes font {
+			0% {
+				font-size: 0;
+			}
+
+			100% {
+				font-size: 100%;
+			}
+		}
+
+		.card {
+			background-color: white;
+			max-width: 500px;
+			width: 100%;
+			padding: 20px;
+			margin: auto;
+			border-radius: 20px;
+			/* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+		}
+
+		h1 {
+			font-weight: 100;
+			margin: 0;
+			color: #444;
+			text-align: center;
+			color: blue;
+		}
+
+		.footer {
+			color: #aaa;
+			opacity: 0.7;
+			max-width: 960px;
+			width: 100%;
+			padding: 10px;
+			margin: auto;
+		}
+
+		p {
+			font-weight: 300;
+		}
+
+		svg {
+			height: 50px;
+		}
+
+		.input-group {
+			position: relative;
+			padding-top: 20px;
+			margin-top: 20px;
+		}
+
+		.input-group:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+
+		.input-group input {
+			border: none;
+			border-bottom: solid 1px #ccc;
+			width: 100%;
+			padding: 10px 0;
+			transition: border-color 0.2s ease, box-shadow 0.2s ease;
+		}
+
+		.input-group input:focus {
+			outline: none;
+			border-color: #20cfb8;
+			box-shadow: 0 1px 0 0 #20cfb8;
+		}
+
+		.input-group label {
+			position: absolute;
+			top: 30px;
+			left: 0;
+			color: #aaa;
+			font-weight: 300;
+			transition: transform 0.2s ease, color 0.2s ease;
+		}
+
+		.input-group label:hover {
+			cursor: text;
+		}
+
+		.input-group input:focus+label {
+			color: #20cfb8;
+		}
+
+		.input-group input:focus+label,
+		.input-group input.active+label {
+			transform: translateY(-30px);
+		}
+
+		.btn {
+			float: right;
+			color: #20cfb8;
+			border: none;
+			outline: none;
+			background-color: transparent;
+			border-radius: 2px;
+			padding: 10px 20px;
+			text-transform: uppercase;
+			transition: opacity 0.2s ease, background-color 0.2s ease-in-out;
+		}
+
+		.btn:hover,
+		.btn:focus {
+			background-color: #fbfbfb;
+		}
+
+		.btn:active {
+			background-color: #f2f2f2;
+		}
+
+		@media (min-width:600px) {
+			body {
+				font-size: 1rem;
+			}
+		}
+	</style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+
+	<div class="card">
+		<h1>Enter the shipping details</h1>
+		<div class="input-group">
+			<input type="text" id="first" class="m-input">
+			<label for="first">Full name</label>
+		</div>
+		<div class="input-group">
+			<input type="text" id="last" class="m-input">
+			<label for="email">Email id</label>
+		</div>
+		<div class="input-group">
+			<input type="text" id="Contact" class="m-input">
+			<label for="Contact">Contact number</label>
+		</div>
+		<div class="input-group">
+			<input type="text" id="address" class="m-input">
+			<label for="address">Address</label>
+		</div>
+		<div class="input-group">
+			<input type="text" id="ZipCode" class="m-input">
+			<label for="ZipCode">Zip Code</label>
+		</div>
+		<div class="input-group">
+			<button class="btn" onclick="shipping()">Submit</button>
+		</div>
+	</div>
+
+	<script src="input_page.js"></script>
+</body>
+
+</html>
